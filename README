@@ -1,0 +1,58 @@
+This directory contains an example of co-evolution.  A red robot,
+which gets light sensors as input, and a blue robot, which gets light
+sensors plus the minimum front sonar reading as input, are competing
+for food within an environment.  Each receives fitness for the amount
+of food it consumes.  
+
+In evaluating one population, the current programs only uses the best
+brain of the other population from the previous generation.  This is
+simpler than the approach taken in the NEAT paper where they had a
+hall of fame that contained all previous best brains.  This would be
+relatively easy to implement and is probably preferable.
+
+The co-evolution proceeds in lockstep.  Each population must complete
+the current generation before the next generation can begin.
+
+This particular example uses very small populations and a very limited
+number of generations just so that you can see the results relatively
+quickly.  You would want to increase the population size and the number
+of generations for your actual experiments. 
+
+Here are the steps needed to use this approach:
+
+1. Create two versions of the world using different port numbers for
+the robots in each world.  See blueWorld.py and redWorld.py for
+examples.
+
+2. Create initialization programs to generate random brains for the
+starting point of the co-evolution.  See blueInit.py and redInit.py
+for examples.  
+
+3. Create neat control programs for each population in the
+co-evolution.  See blueEat.py and redEat.py for examples.
+
+4. Run the initialization programs:
+
+python blueInit.py
+python redInit.py
+
+This will create:
+
+blue_init_chromo
+red_init_chromo
+
+5. Run each of the NEAT control programs in separate windows:
+
+python redEat.py &
+python blueEat.py &
+
+Initially they will both run simultaneously, but after the first
+generation, you'll see them wait for the other population to finish
+the current generation.  
+
+6. To evaluate a red_best_chromo_3 do:
+
+python redEat.py 3
+
+It will use the other population's best brain from the previous
+generation (in this case 2).

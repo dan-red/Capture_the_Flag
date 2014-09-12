@@ -1,0 +1,9 @@
+This directory contains a basic latex template for creating a computer
+science conference-style paper. The content of the paper is in the
+file called paper.tex. The bibliography is in the file called
+paper.bib.  The figures that are included in the paper are in the
+files with a .png extension.  There is also a Makefile to create a pdf
+version of the paper for you.  When you run make, if the tex file or
+bib file has changed, then a new pdf version of the paper will be
+created.
+
